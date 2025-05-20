@@ -1,48 +1,43 @@
-# Astro Starter Kit: Basics
+# 🎵 Plataforma para Músicos
 
-```sh
-npm create astro@latest -- --template basics
-```
+Una web pensada para músicos donde pueden **guardar y compartir sus canciones, covers o versiones** de canciones favoritas.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## 🚀 Descripción del Proyecto
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Esta plataforma permite a los usuarios:
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+- Subir sus propias canciones o versiones.
+- Compartirlas con otros usuarios.
+- Crear listas personalizadas con sus canciones y las que les gusten de otros músicos.
 
-## 🚀 Project Structure
+## 🧑‍💻 Tecnologías Utilizadas
 
-Inside of your Astro project, you'll see the following folders and files:
+- **Frontend**: [Astro]
+- **Autenticación y Gestión de Usuarios**: [Clerk]
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## 🔐 Gestión de Usuarios
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- Registro e inicio de sesión con Clerk.
+- Permisos personalizados para crear y gestionar canciones.
+- Creación de listas propias con tus canciones favoritas o de otros usuarios.
 
-## 🧞 Commands
+## 
 
-All commands are run from the root of the project, from a terminal:
+#Demo 
+https://grand-melomakarona-d263b6.netlify.app/
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Web images 
 
-## 👀 Want to learn more?
+![Image](https://github.com/user-attachments/assets/c403744c-df01-4c98-bca8-194bc89e5db4)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+![Image](https://github.com/user-attachments/assets/a60f6a0c-df55-4e1b-996c-98226a9da491)
+
+![Image](https://github.com/user-attachments/assets/f30306b9-fa40-4295-9a70-f5716fa1f3d3)
+
+![Image](https://github.com/user-attachments/assets/b18f23bc-2907-42e1-aabd-56118ade6680)
+
+![Image](https://github.com/user-attachments/assets/94c7f572-0688-422d-ac33-e4b99450d3cd)
+
+![Image](https://github.com/user-attachments/assets/826dff40-822c-4fe6-a11c-8e133d217a27)
+
+![Image](https://github.com/user-attachments/assets/6fcdb8f2-dc1c-4cb8-aa4b-cbbc9d3a923b)
