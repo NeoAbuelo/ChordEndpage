@@ -1,0 +1,17 @@
+---
+
+import Layout from '../layouts/Layout.astro';
+import Listadecanciones from '../components/Listadecanciones.astro'
+
+const API_URL = import.meta.env.API_URL
+const data = await fetch(API_URL + "songs/publico").then(response => response.json());
+const lista = data.data
+
+---
+
+<Layout>
+    <div  class="w-auto items-center">
+        <h2 class="p-10 text-center text-5xl font-extrabold">Lista de Canciones Públicas</h2>
+         <Listadecanciones lista = {lista} />    
+    </div>
+</Layout>

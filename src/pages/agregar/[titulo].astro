@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export const prerender = false;
+
+const { userId } = Astro.locals.auth()
+
+if (!userId) {
+  return Astro.redirect('/')
+}
+
+const { titulo } = Astro.params
+const songs_all = await fetch(import.meta.env.API_URL + "songs").then(response => response.json());
+const songs =  songs_all.data;
+const song = songs.find((song:any) => song.slug === titulo)
+
+if (userId){
+    const user_id = await Astro.locals.currentUser() 
+	if (song){
+		await fetch(import.meta.env.API_URL + "lista", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name_usuario:  user_id?.id,
+                slug: song.slug,
+                tono: song.tonalidad,
+            }),
+        });
+        
+         return Astro.redirect('/listas')
+
+    }
+}
+
+---
+
+<Layout>
+    <div class="w-full justify-center items-center ">
+        <h2>Cancion Agregada Correctamente</h2>
+    </div>
+</Layout>
+

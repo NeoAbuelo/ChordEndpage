@@ -1,0 +1,59 @@
+---
+import Addlista from './Addlista.astro';
+
+const user_id = await Astro.locals.currentUser() 
+const song_data_usuario = await fetch(import.meta.env.API_URL + "lista/" + user_id?.id).then(response => response.json());
+
+const { lista } = Astro.props;
+
+---
+
+<div class="rounded-lg shadow-sm m-4 backdrop-blur-lg w-full xl:w-[1120px] mx-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-600 uppercase bg-gray-50 dark:bg-[#B39966] dark:text-violet-50">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Songs
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Tonalidad
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Autor
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Estado
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {    
+           
+           lista.map( (variable:any) => (
+
+
+           <tr class="bg-white border-b dark:bg-[#222] dark:border-gray-700 border-gray-200">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white hover:text-amber-500">
+                    <a href={`./canciones/${variable.slug}`}>{variable.titulo}</a> 
+                </th>
+                <td class="px-6 py-4">
+                   Tono: {variable.tonalidad}
+                </td>
+                <td class="px-6 py-4">
+                    {variable.creador}
+                </td>
+                <td class="px-6 py-4">
+                    {variable.state}
+                </td>
+                <td class="px-6 py-4">
+                    <Addlista cancion = {variable} data_song = { song_data_usuario.data } />
+                </td>
+            </tr>
+           ))
+
+           }
+        </tbody>
+    </table>
+</div>
+
+

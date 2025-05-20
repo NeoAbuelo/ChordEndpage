@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const { userId, redirectToSignIn} = Astro.locals.auth();
+
+
+if (!userId){
+    return redirectToSignIn( )
+}
+
+const user_id  = await Astro.locals.currentUser()
+
+const URL = import.meta.env.API_URL + "songs"
+
+const generos = await fetch(import.meta.env.API_URL + "generos").then(response => response.json());
+const generos_data = generos.data
+
+---
+
+<Layout>
+    <div class="w-full justify-center items-center py-10 ">
+        <main class="text-center">
+            <h1 class="text-3xl py-10"> Escribe tu canción </h1>
+
+            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                <form action={URL} method="post">
+                    <input id="name_usuario" name="name_usuario" type="hidden" value=`${user_id?.id}` />
+                    <div class="grid grid-cols-4 grid-rows-3 gap-4">
+                        <label for="titulo" >Titulo:</label>
+                        <input type="text" name="titulo" class="bg-white text-black">
+                        <label for="tonalidad">Tonalidad:</label>
+                        <input type="text" name="tonalidad" class="bg-white text-black">
+                        <label for="tonalidad">Autor:</label>
+                        <input type="text" name="creador" class="bg-white text-black">
+                    </div>
+                    <div class="flex items-center justify-center gap-x-4 py-10">
+                        
+                        <div>
+                            <input type="radio" id="privado" name="state" value="1" checked />
+                            <label for="state">Privado</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="publico" name="state" value="0" />
+                            <label for="state">Público</label>
+                        </div>
+                        <label for="Genero">Genero: </label>
+                        <select name = "genero_id" id="genero" class="bg-white text-black">
+                            <option>Seleccione un Genero</option>
+                           {
+                             generos_data.map((genero:any)=>(
+
+                                 <option  value= `${genero.id}` >{genero.name_genero}</option>
+                             ))    
+                           }
+                        </select>
+                    </div>
+                    <div class="flex flex-col justify-center items-center gap-y-2">
+                        <label for="cancion">Tu Canción:</label><br>
+                        <textarea class="bg-white text-black resize-none box-border" name="cancion" id="cancion" cols="50" rows="25"></textarea>
+                        <button class="bg-[#B39966] w-30 h-10 rounded-2xl " type="submit" onclick="Astro.redirect('/portalusuario') ">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>  
+</Layout>

@@ -1,0 +1,25 @@
+---
+import { SignedIn, SignedOut, SignInButton  } from '@clerk/astro/components';
+
+const user_id = await Astro.locals.currentUser() 
+
+const { cancion, data_song } = Astro.props
+
+const agregar = data_song?.find((song:any)=>{
+    return song.slug === cancion.slug
+})
+
+---
+<SignedIn>
+    {
+        agregar != undefined 
+        ? <a  type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        En la lista </a>
+        : <a href= {`agregar/${cancion.slug}`} class="addSong text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Agregar a la lista </a>
+    }                
+</SignedIn> 
+
+<SignedOut>
+    <SignInButton mode="modal" class="bg-[#B39966] text-amber-100 px-4 py-2 rounded-2xl"> Inicia sesion para agregar a la lista </SignInButton>
+</SignedOut>

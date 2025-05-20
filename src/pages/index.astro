@@ -1,11 +1,36 @@
 ---
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Cardspresentationpublica from '../components/Cardspresentationpublica.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const { userId } = Astro.locals.auth()
+
+// Sincronosación con la base de datos 
+if (userId){
+	const user_id = await Astro.locals.currentUser()
+	const users = await fetch(import.meta.env.API_URL+"users").then(response => response.json());
+	const userData = users.data.find((user:any) => user.name_usuario === user_id?.id)
+	if (!userData){
+		await fetch(import.meta.env.API_URL+"users", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				name_usuario: user_id?.id,
+				email: user_id?.emailAddresses[0].emailAddress
+			}),
+		});
+	}
+}
+
+
 ---
 
 <Layout>
-	<Welcome />
+	<div class="w-full bg-[url(./src/assets/portada.webp)] bg-cover" >
+		<Welcome/>
+	</div>
+	<Cardspresentationpublica />
 </Layout>
+

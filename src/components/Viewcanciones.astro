@@ -1,0 +1,30 @@
+---
+import { SignedIn, SignedOut, UserButton, SignInButton } from '@clerk/astro/components';
+import Addlista from './Addlista.astro';
+
+const user_id = await Astro.locals.currentUser() 
+const song_data_usuario = await fetch(import.meta.env.API_URL + "lista/" + user_id?.id).then(response => response.json());
+
+const { song } = Astro.props
+
+
+
+---
+
+<div  class="w-auto items-center">
+        <SignedOut>
+            <div class="text-center p-10">
+                <p> Para añadir esta canción a tu lista <SignInButton mode="modal" class="bg-[#B39966] text-amber-100 px-4 py-2"> Iniciar Sesión </SignInButton>  </p>
+            </div>
+        </SignedOut>
+        <SignedIn> 
+            <div class="text-center p-10">
+                <p>Añadir a tu lista <Addlista cancion = {song} data_song = { song_data_usuario.data }   /> </p>
+            </div>
+        </SignedIn>
+
+        <h1 class="p-10 text-center text-5xl font-extrabold">{song.titulo}</h1>
+        <div class="flex justify-center items-center ">
+            <pre class="w-100">{song.cancion}</pre>
+        </div>
+    </div>

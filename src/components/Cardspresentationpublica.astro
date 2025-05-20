@@ -1,0 +1,19 @@
+---
+import Card from './Card.astro';
+import { SignedIn, SignedOut } from '@clerk/astro/components';
+import Cardprivada from './Cardprivada.astro';
+
+const data = await fetch(import.meta.env.API_URL + "songs/publico").then(response => response.json());
+const publica = data.data
+
+---
+
+<SignedIn>
+    <Cardprivada/>
+</SignedIn>
+
+<SignedOut>
+    <div class="flex justify-center items-center p-10">
+        <Card name = "Canciones de la Semana" lista = {publica.slice(0,5)}/>
+    </div>
+</SignedOut>
