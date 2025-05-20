@@ -4,10 +4,16 @@ import Card from './Card.astro';
 // Get the Backend User object when you need access to the user's information
 const user_id = await Astro.locals.currentUser()
 
-const data = await fetch(import.meta.env.API_URL+"lista/"+ user_id?.id).then(response => response.json());
+const data = await fetch(import.meta.env.API_URL+"lista/"+ user_id?.id).then(response => response.json()).catch((error) => {
+		console.error("Error fetching users:", error);
+		return { data: [] }; // Return an empty array if there's an error
+	});;
 const privada = data.data
 
-const data2 = await fetch(import.meta.env.API_URL + "songs/publico").then(response => response.json());
+const data2 = await fetch(import.meta.env.API_URL + "songs/publico").then(response => response.json()).catch((error) => {
+		console.error("Error fetching users:", error);
+		return { data: [] }; // Return an empty array if there's an error
+	});;
 const publica = data2.data
 
 

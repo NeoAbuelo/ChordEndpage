@@ -12,7 +12,10 @@ const user_id  = await Astro.locals.currentUser()
 
 const URL = import.meta.env.API_URL + "songs"
 
-const generos = await fetch(import.meta.env.API_URL + "generos").then(response => response.json());
+const generos = await fetch(import.meta.env.API_URL + "generos").then(response => response.json()).catch((error) => {
+		console.error("Error fetching users:", error);
+		return { data: [] }; // Return an empty array if there's an error
+	});;
 const generos_data = generos.data
 
 ---

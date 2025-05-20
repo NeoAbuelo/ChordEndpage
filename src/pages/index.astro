@@ -8,7 +8,10 @@ const { userId } = Astro.locals.auth()
 // Sincronosación con la base de datos 
 if (userId){
 	const user_id = await Astro.locals.currentUser()
-	const users = await fetch(import.meta.env.API_URL+"users").then(response => response.json());
+	const users = await fetch(import.meta.env.API_URL+"users").then(response => response.json()).catch((error) => {
+		console.error("Error fetching users:", error);
+		return { data: [] }; // Return an empty array if there's an error
+	});
 	const userData = users.data.find((user:any) => user.name_usuario === user_id?.id)
 	if (!userData){
 		await fetch(import.meta.env.API_URL+"users", {

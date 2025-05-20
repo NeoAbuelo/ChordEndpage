@@ -10,7 +10,10 @@ if (!userId) {
 }
 
 const { titulo } = Astro.params
-const songs_all = await fetch(import.meta.env.API_URL + "songs").then(response => response.json());
+const songs_all = await fetch(import.meta.env.API_URL + "songs").then(response => response.json()).catch((error) => {
+		console.error("Error fetching users:", error);
+		return { data: [] }; // Return an empty array if there's an error
+	});;
 const songs =  songs_all.data;
 const song = songs.find((song:any) => song.slug === titulo)
 

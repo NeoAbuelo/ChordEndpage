@@ -3,7 +3,10 @@ import Card from './Card.astro';
 import { SignedIn, SignedOut } from '@clerk/astro/components';
 import Cardprivada from './Cardprivada.astro';
 
-const data = await fetch(import.meta.env.API_URL + "songs/publico").then(response => response.json());
+const data = await fetch(import.meta.env.API_URL + "songs/publico").then(response => response.json()).catch((error) => {
+		console.error("Error fetching users:", error);
+		return { data: [] }; // Return an empty array if there's an error
+	});;
 const publica = data.data
 
 ---
