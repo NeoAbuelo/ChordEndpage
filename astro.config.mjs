@@ -9,6 +9,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 import react from "@astrojs/react";
 
+import netlify from "@astrojs/netlify";
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [clerk({
@@ -19,6 +21,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  adapter: node({ mode: "standalone" }),
+  adapter: netlify(),
   output: "server",
 });
